@@ -59,30 +59,27 @@ def run(path):
             print("正常文件：" + name)
             quanpath = os.path.join(path, name)
             if os.path.isfile(quanpath):
-                writeRelo(path, name, "手机号-187540******")
+                writeRelo(path, name, info)
                 print("写入链接文件成功")
                 # 如果是文件，则创建文件链接
             elif os.path.isdir(quanpath):
-                if recursive:
-                    # 如果是目录，则且开启了递归执行，则
-                    if recursivenum < recursiveMaxnum:
-                        # 如果开递归处理了，并且小于最大递归层数
-                        print("进入下一层")
-                        recursivenum += 1
-                        # 如果不是文件，则执行
-                        run(quanpath)
-                    else:
-                        if processdir:
-                            print("遇到目录，处理")
-                            writeRelo(path, name, "手机号-187540******")
-                        else:
-                            print("遇到目录，但未开启处理")
-                            continue
-
+                # 如果是目录
+                if recursive and recursivenum < recursiveMaxnum:
+                    # 如果是目录，且开启了递归执行
+                    # 如果开递归处理了，并且小于最大递归层数
+                    print("进入下一层")
+                    recursivenum += 1
+                    # 如果不是文件，则执行
+                    run(quanpath)
+                elif recursive:
+                    # 如果仅仅可以递归，但是不能再次递归了
+                    # 不能再深入的时候就把目录给处理
+                    writeRelo(path, name, info)
+                    ...
                 else:
                     if processdir:
                         print("遇到目录，处理")
-                        writeRelo(path, name, "手机号-187540******")
+                        writeRelo(path, name, info)
                     else:
                         print("遇到目录，但未开启处理")
                         continue
@@ -108,5 +105,7 @@ if __name__ == "__main__":
 
     # 递归层数初始化
     recursivenum = 0
+
+    info="手机号-187540******"
     path = r"E:\Video\生活大爆炸全集"
     run(path)
