@@ -1,0 +1,13 @@
+- 自身（原本）文件名：Original_file
+- 远程服务信息
+  - 服务商：Service_Provider
+  - *是客户端还是网页还是两者都可以：Client_or_Web [Client,Web,all]*
+  - *其他信息，例如打开对应网页需要的域名，或者打开相应程序的信息）：*
+    - *客户端：Client*
+    - *网页：Web*
+- *远程文件：Remote_file*
+- 远程登录帐号（仅做登录提醒，具体登录还是用户完成登录，可填前几位或后几位，例如“手机号-1875*********”）：Remote_login_account
+- 目录or文件：Directory_or_file [d,f]
+- 目录/文件大小（可空）：Size
+- 主文件(若是文件，则指此文件)扩展名：Main_file_extension
+- *主文件类型（电影？电视剧？可执行程序？源码？压缩包、镜像文件）：Main_file_type []*
