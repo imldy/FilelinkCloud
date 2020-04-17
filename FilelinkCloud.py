@@ -55,38 +55,40 @@ def run(path):
     listdir = os.listdir(path)
     for name in listdir:
         # 根据文件名判断是不是已创建的文件链接
-        if ".cllo" not in name:
-            print("正常文件：" + name)
-            quanpath = os.path.join(path, name)
-            if os.path.isfile(quanpath):
+        quanpath = os.path.join(path, name)
+        if os.path.isfile(quanpath):
+            if ".cllo" not in name:
+                print("正常文件：" + name)
                 writeRelo(path, name, info)
                 print("写入链接文件成功")
                 # 如果是文件，则创建文件链接
-            elif os.path.isdir(quanpath):
-                # 如果是目录
-                if recursive and recursivenum < recursiveMaxnum:
-                    # 如果是目录，且开启了递归执行
-                    # 如果开递归处理了，并且小于最大递归层数
-                    print("进入下一层")
-                    recursivenum += 1
-                    # 如果不是文件，则执行
-                    run(quanpath)
-                elif recursive:
-                    # 如果仅仅可以递归，但是不能再次递归了
-                    # 不能再深入的时候就把目录给处理
+            else:
+                print("遇到的已完成的链接文件：" + name)
+        elif os.path.isdir(quanpath):
+            # 如果是目录
+            if recursive and recursivenum < recursiveMaxnum:
+                # 如果是目录，且开启了递归执行
+                # 如果开递归处理了，并且小于最大递归层数
+                print("进入下一层")
+                recursivenum += 1
+                # 如果不是文件，则执行
+                run(quanpath)
+            elif recursive:
+                # 如果仅仅可以递归，但是不能再次递归了
+                # 不能再深入的时候就把目录给处理
+                writeRelo(path, name, info)
+                ...
+            else:
+                if processdir:
+                    print("遇到目录，处理")
                     writeRelo(path, name, info)
-                    ...
                 else:
-                    if processdir:
-                        print("遇到目录，处理")
-                        writeRelo(path, name, info)
-                    else:
-                        print("遇到目录，但未开启处理")
-                        continue
-                # # 其余情况正常处理
-                # writeRelo(path, name, "手机号-187540******")
-        else:
-            print("遇到的已完成的链接文件：" + name)
+                    print("遇到目录，但未开启处理")
+                    continue
+            # # 其余情况正常处理
+            # writeRelo(path, name, "手机号-187540******")
+        print("返回上一层")
+        recursivenum -= 1
 
 
 if __name__ == "__main__":
