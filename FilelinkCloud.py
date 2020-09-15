@@ -92,6 +92,7 @@ def run(path):
 
 
 if __name__ == "__main__":
+    # input("将会删除文件，请注意，不允许请按Ctrl+C")
     # 设置字节计量单位
     unit = ["B", "KB", "MB", "GB", "TB"]
     # 设置是否递归执行
@@ -103,11 +104,11 @@ if __name__ == "__main__":
     # 如果已有链接文件，是否用新的进行覆盖
     cover = True
     # 设置创建完成文件链接之后（或者存在链接文件）删除文件
-    remove = True
+    remove = False
 
     # 递归层数初始化
     recursivenum = 0
 
     info="手机号-187540******"
-    path = r"E:\Video\生活大爆炸全集"
+    path = r""
     run(path)
